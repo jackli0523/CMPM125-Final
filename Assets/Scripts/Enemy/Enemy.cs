@@ -7,7 +7,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    Rigidbody2D rb;
+    protected Rigidbody2D rb;
     [HideInInspector] public PhysicsCheck physicsCheck;
     [HideInInspector] public Animator animator;
     [Header("Enemy Basic parameters")]
