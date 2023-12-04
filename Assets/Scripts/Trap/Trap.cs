@@ -26,10 +26,10 @@ public class Trap : Attack
     void Start()
     {
         startPosition = transform.position;
-        verDirection = Vector3.up * Mathf.Sign(verDistance); // ´¹Ö±ÒÆ¶¯·½Ïò
-        horDirection = Vector3.right * Mathf.Sign(horDistance); // Ë®Æ½ÒÆ¶¯·½Ïò
+        verDirection = Vector3.up * Mathf.Sign(verDistance); // ï¿½ï¿½Ö±ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
+        horDirection = Vector3.right * Mathf.Sign(horDistance); // Ë®Æ½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
         endPosition = startPosition + (isVertical ? verDirection * Mathf.Abs(verDistance) : horDirection * Mathf.Abs(horDistance));
-        movingToEnd = true; // ³õÊ¼ÉèÖÃÎªÒÆ¶¯µ½ÖÕµã
+        movingToEnd = true; // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Îªï¿½Æ¶ï¿½ï¿½ï¿½ï¿½Õµï¿½
     }
 
     void Update()
@@ -49,16 +49,16 @@ public class Trap : Attack
         {
             if (isLooping)
             {
-                movingToEnd = !movingToEnd; // Íù¸´ÒÆ¶¯Ê±¸Ä±ä·½Ïò
+                movingToEnd = !movingToEnd; // ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½Ê±ï¿½Ä±ä·½ï¿½ï¿½
             }
             else
             {
-                transform.position = startPosition; // ·ÇÍù¸´ÒÆ¶¯Ê±Á¢¼´·µ»ØÆðµã
+                transform.position = startPosition; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             }
         }
     }
 
-    protected virtual void OnTriggerStay2D(Collider2D other)
+    protected override void OnTriggerStay2D(Collider2D other)
     {
         if (isDamage) { 
             other.GetComponent<Character>()?.TakeDamage(this);
