@@ -598,17 +598,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 939146185683582450, guid: 5ee18542b584d0d4186df5894689139c, type: 3}
   m_PrefabInstance: {fileID: 455457152}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &455457154 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3442385636521200664, guid: 5ee18542b584d0d4186df5894689139c, type: 3}
-  m_PrefabInstance: {fileID: 455457152}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6323813184bd46a47a4a9250102238fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,11 +1108,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &924879244 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1070343258200819532, guid: 219c04b75ea6b474997f98aea9106464, type: 3}
-  m_PrefabInstance: {fileID: 397105462}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &978528231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,12 +1320,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78359932ba44aee4794be56c98e8cf70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  targetInSight: 0
+  targetInAttackRange: 0
+  targetChaseable: 0
+  targetAtBack: 0
+  targetAround: 0
+  isHurt: 0
+  isDead: 0
+  enemyState: 0
+  rb: {fileID: 0}
   physicsCheck: {fileID: 0}
   animator: {fileID: 0}
   patrolSpeed: 100
   chaseSpeed: 260
   currentSpeed: 0
   initialFaceDirection: 0
+  initialLocalScale: {x: 0, y: 0, z: 0}
   currentFaceDirection: 0
   moveDirection: {x: 0, y: 0}
   attacker: {fileID: 0}
@@ -1352,17 +1347,9 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
-  targetInSight: 0
-  targetInAttackRange: 0
-  targetChaseable: 0
   targetAroundDistance: 4
-  targetAround: 0
-  target: {fileID: 0}
   lostTargetTime: 3
   lostTargetTimeCounter: 3
-  isHurt: 0
-  isDead: 0
-  enemyState: 0
   waitTime: 2
   waitTimeCounter: 2
   wait: 0
@@ -2136,6 +2123,7 @@ Transform:
   m_Children:
   - {fileID: 1025087374}
   - {fileID: 99394379}
+  - {fileID: 455457153}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1412934238 stripped
@@ -2340,11 +2328,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126c129a694a7e84382475f60bb157f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPlayer: {fileID: 1187004521}
-  slimePrefab: {fileID: 0}
+  currentPlayer: {fileID: 0}
+  slimePrefab: {fileID: 8060970009953460395, guid: 4dc8a152f86659a4c82638edcf8cc611, type: 3}
   BoarPrefab: {fileID: 5251088991852260881, guid: 67fd9f7df94f5b94e84996848225b0a1, type: 3}
   soldierPrefab: {fileID: 1070343258200819532, guid: 219c04b75ea6b474997f98aea9106464, type: 3}
-  RangerPrefab: {fileID: 0}
+  RangerPrefab: {fileID: 2872404259324142307, guid: c070bdf39380d1e48bb6c7350bb63382, type: 3}
   isLookingBoar: 0
   isLookingSoldier: 0
   isLookingRanger: 0
@@ -27326,14 +27314,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ranger
       objectReference: {fileID: 0}
-    - target: {fileID: 5717004622826612538, guid: 4ffc4a3e60a53db4ea00d220e62d1ca4, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7659220327444780153, guid: 4ffc4a3e60a53db4ea00d220e62d1ca4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 14.71
-      objectReference: {fileID: 0}
     - target: {fileID: 746293140223558825, guid: 4ffc4a3e60a53db4ea00d220e62d1ca4, type: 3}
       propertyPath: m_LocalPosition.y
       value: 3.09
@@ -27369,6 +27349,14 @@ PrefabInstance:
     - target: {fileID: 746293140223558825, guid: 4ffc4a3e60a53db4ea00d220e62d1ca4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5717004622826612538, guid: 4ffc4a3e60a53db4ea00d220e62d1ca4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7659220327444780153, guid: 4ffc4a3e60a53db4ea00d220e62d1ca4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.71
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27875,10 +27863,10 @@ SceneRoots:
   - {fileID: 6437327547858608866}
   - {fileID: 2037703779}
   - {fileID: 556168203}
-  - {fileID: 4730427596405346529}
   - {fileID: 8096044516668788889}
   - {fileID: 1166276326}
   - {fileID: 5868037882261062554}
   - {fileID: 720134755454246580}
   - {fileID: 2760102685090847692}
   - {fileID: 1372502732}
+  - {fileID: 978528235}
