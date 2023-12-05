@@ -26,10 +26,10 @@ public class Trap : Attack
     void Start()
     {
         startPosition = transform.position;
-        verDirection = Vector3.up * Mathf.Sign(verDistance); // ��ֱ�ƶ�����
-        horDirection = Vector3.right * Mathf.Sign(horDistance); // ˮƽ�ƶ�����
+        verDirection = Vector3.up * Mathf.Sign(verDistance); 
+        horDirection = Vector3.right * Mathf.Sign(horDistance); 
         endPosition = startPosition + (isVertical ? verDirection * Mathf.Abs(verDistance) : horDirection * Mathf.Abs(horDistance));
-        movingToEnd = true; // ��ʼ����Ϊ�ƶ����յ�
+        movingToEnd = true; 
     }
 
     void Update()
@@ -49,11 +49,11 @@ public class Trap : Attack
         {
             if (isLooping)
             {
-                movingToEnd = !movingToEnd; // �����ƶ�ʱ�ı䷽��
+                movingToEnd = !movingToEnd; 
             }
             else
             {
-                transform.position = startPosition; // �������ƶ�ʱ�����������
+                transform.position = startPosition; 
             }
         }
     }

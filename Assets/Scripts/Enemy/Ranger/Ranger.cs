@@ -41,7 +41,6 @@ public class Ranger : Enemy
 
     public void ShootArrow()
     {
-        // Debug.Log("Shoot an arrow");
         //Instantite the arrow prefab
         isAttack = true;
         GameObject arrow = EnemyArrowPool.SharedInstance.GetPooledObject();
