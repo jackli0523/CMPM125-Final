@@ -8,6 +8,9 @@ TagManager:
   - Boar
   - PlayerShoot
   - Ranger
+  - EnemyRanger
+  - PlayerArrow
+  - EnemyArrow
   layers:
   - Default
   - TransparentFX

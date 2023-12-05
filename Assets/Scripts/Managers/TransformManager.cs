@@ -40,7 +40,7 @@ public class TransformManager : MonoBehaviour
             Destroy(gameObject);
         }
         inputControl = new PlayerInputControl();
-
+        currentPlayer = FindObjectOfType<PlayerController>().gameObject;
         inputControl.Gameplay.Transform.started += TransformInput;
         currentHealth = maxHealth;
     }
@@ -66,7 +66,7 @@ public class TransformManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        currentPlayer = FindObjectOfType<PlayerController>().gameObject;
     }
 
     public void SetHitTag(string hitTag)

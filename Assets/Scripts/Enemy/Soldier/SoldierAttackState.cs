@@ -3,45 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SoldierAttackState : BaseState
 {
-    public bool targetAtBack;
     public override void OnEnter(Enemy enemy)
     {
         currentEnemy = enemy;
         currentEnemy.currentSpeed = 0f;
-        currentEnemy.animator.SetBool("isAttack", true);
+        ((Soldier)currentEnemy).isAttack = true;
         currentEnemy.animator.SetTrigger("attack");
+        ((Soldier)currentEnemy).attackTimer = 0f;
     }
 
     public override void LogicUpdate()
     {
-        if (currentEnemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > .8f && currentEnemy.targetInAttackRange && currentEnemy.targetChaseable)
+        if (currentEnemy.targetAtBack)
         {
-            currentEnemy.animator.SetTrigger("attack");
+            currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, currentEnemy.transform.localScale.y, currentEnemy.transform.localScale.z);
+        }
+        if (((Soldier)currentEnemy).triggerDodge && ((Soldier)currentEnemy).dodgeTimer == 0)
+        {
+            currentEnemy.SwitchState(EnemyState.dodge);
             return;
         }
-        if (currentEnemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        if (((Soldier)currentEnemy).attackTimer > 0)
         {
-            if (currentEnemy.targetChaseable)
-            { currentEnemy.SwitchState(EnemyState.chase); }
-            else
+            return;
+        }
+        else
+        {
+            if (currentEnemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > .8f)
             {
-                if (IsTargetAtBack())
+                if (currentEnemy.targetInAttackRange && currentEnemy.targetChaseable)
                 {
-                    currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, currentEnemy.transform.localScale.y, currentEnemy.transform.localScale.z);
+                    currentEnemy.animator.SetTrigger("attack");
+                    if (currentEnemy.animator.GetCurrentAnimatorStateInfo(0).IsName("Enemy Soldier Attack2"))
+                    {
+                        ((Soldier)currentEnemy).attackTimer = ((Soldier)currentEnemy).attackCooldown;
+                    }
+                    return;
                 }
-                currentEnemy.SwitchState(EnemyState.idle);
+            }
+            else if (currentEnemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+            {
+                currentEnemy.SwitchState(EnemyState.chase);
             }
         }
     }
     public override void PhysicsUpdate() { }
     public override void OnExit()
     {
-        currentEnemy.animator.SetBool("isAttack", false);
     }
 
-    public bool IsTargetAtBack()
-    {
-        return targetAtBack = (currentEnemy.transform.position.x > currentEnemy.target.transform.position.x && currentEnemy.transform.localScale.x > 0) ||
-            (currentEnemy.transform.position.x < currentEnemy.target.transform.position.x && currentEnemy.transform.localScale.x < 0);
-    }
+
 }

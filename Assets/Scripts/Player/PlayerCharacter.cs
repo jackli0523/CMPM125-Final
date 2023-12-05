@@ -7,28 +7,28 @@ public class PlayerCharacter : Character
 {
     public float defence;
 
-    protected override void Start(){
+    protected override void Start()
+    {
         maxHealth = TransformManager.Instance.maxHealth;
-        currentHealth = maxHealth;      
+        currentHealth = maxHealth;
     }
 
     public override void TakeDamage(Attack attacker)
     {
-         if (invulnerable)
+        if (invulnerable)
         {
             return;
         }
-
-        if (currentHealth - (attacker.damage - defence)  > 0)
+        float dmgTaken = Mathf.Max((attacker.damage - defence), 1);
+        currentHealth = Mathf.Clamp((currentHealth - dmgTaken), 0, maxHealth);
+        if (currentHealth > 0)
         {
-            currentHealth -= attacker.damage - defence;
             TriggerInvulnerable();
             //触发受伤
             OnTakeDamage?.Invoke(attacker.transform);
         }
         else
         {
-            currentHealth = 0;
             //触发死亡
             OnDeath?.Invoke();
         }

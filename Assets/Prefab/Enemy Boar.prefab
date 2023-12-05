@@ -273,7 +273,7 @@ MonoBehaviour:
   checkBoxDistance: 3
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   targetInSight: 0
   targetInAttackRange: 0
   targetChaseable: 0

@@ -79,7 +79,7 @@ public class Trap : Attack
         }
     }
 
-    protected virtual void OnTriggerStay2D(Collider2D other)
+    protected override void OnTriggerStay2D(Collider2D other)
     {
         if (isDamage) { 
             other.GetComponent<Character>()?.TakeDamage(this);
