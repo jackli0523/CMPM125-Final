@@ -50,6 +50,7 @@ public class Trap : Attack
             float distanceX = Mathf.Abs(transform.position.x - TransformManager.Instance.currentPlayer.transform.position.x);
 
             isMove = distanceX <= activationDistance;
+            needCheckPlayerRange = !isMove;
         }
     }
 
