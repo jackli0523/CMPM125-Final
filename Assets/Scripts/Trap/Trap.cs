@@ -7,15 +7,18 @@ public class Trap : Attack
     [Header("Trap Basic Parameters")]
     public bool isMove;
     public bool isDamage;
+    public bool needCheckPlayerRange;
 
     [Header("Trap Movement")]
     public bool isVertical;
     public bool isHorizontal;
     public bool isLooping;
+    public bool isDestroy;
     public float verDistance;
     public float verSpeed;
     public float horDistance;
     public float horSpeed;
+    public float activationDistance = 5f;
 
     private Vector3 startPosition;
     private Vector3 verDirection;
@@ -26,15 +29,28 @@ public class Trap : Attack
     void Start()
     {
         startPosition = transform.position;
-        verDirection = Vector3.up * Mathf.Sign(verDistance); 
-        horDirection = Vector3.right * Mathf.Sign(horDistance); 
+        verDirection = Vector3.up * Mathf.Sign(verDistance);
+        horDirection = Vector3.right * Mathf.Sign(horDistance);
         endPosition = startPosition + (isVertical ? verDirection * Mathf.Abs(verDistance) : horDirection * Mathf.Abs(horDistance));
-        movingToEnd = true; 
+        movingToEnd = true;
+        isMove = !needCheckPlayerRange; 
     }
 
     void Update()
     {
-        MoveTrap();
+        if (needCheckPlayerRange) { CheckPlayerDistance(); }
+       
+        if (isMove){ MoveTrap(); }
+    }
+
+    private void CheckPlayerDistance()
+    {
+        if (TransformManager.Instance.currentPlayer != null)
+        {
+            float distanceX = Mathf.Abs(transform.position.x - TransformManager.Instance.currentPlayer.transform.position.x);
+
+            isMove = distanceX <= activationDistance;
+        }
     }
 
     private void MoveTrap()
@@ -49,11 +65,15 @@ public class Trap : Attack
         {
             if (isLooping)
             {
-                movingToEnd = !movingToEnd; 
+                movingToEnd = !movingToEnd;
             }
-            else
+            else if (isDestroy) 
             {
-                transform.position = startPosition; 
+                Destroy(gameObject);
+            }
+            else 
+            {
+                transform.position = startPosition;
             }
         }
     }
