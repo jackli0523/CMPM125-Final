@@ -51,7 +51,6 @@ public class RaycastCheck : MonoBehaviour
 
         if (hit.collider != null)
         {
-            Debug.Log(hit.collider.tag);
             if (hit.collider.CompareTag("Soldier"))
             {
 

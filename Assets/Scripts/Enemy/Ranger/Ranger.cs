@@ -26,6 +26,7 @@ public class Ranger : Enemy
         chaseState = new RangerChaseState();
         attackState = new RangerAttackState();
         idleState = new RangerIdleState();
+        
         dodgeState = new RangerDodgeState();
         waitTimeCounter = waitTime;
         dodgeSpeed = chaseSpeed * 2f;
@@ -41,7 +42,6 @@ public class Ranger : Enemy
 
     public void ShootArrow()
     {
-        // Debug.Log("Shoot an arrow");
         //Instantite the arrow prefab
         isAttack = true;
         GameObject arrow = EnemyArrowPool.SharedInstance.GetPooledObject();
@@ -62,7 +62,7 @@ public class Ranger : Enemy
         for (int i = 0; i < 180; i++)
         {
             float angle = transform.rotation.eulerAngles.z - rangerViewAngle / 2 + i * (rangerViewAngle / 180f);
-            Vector2 rayDirection = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad) * (transform.localScale.x > 0 ? 1 : -1), Mathf.Sin(angle * Mathf.Deg2Rad));
+            Vector2 rayDirection = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad) * (currentFaceDirection == FaceDirection.right? 1 : -1), Mathf.Sin(angle * Mathf.Deg2Rad));
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, rayDirection, rangerViewRadius, targetLayer);
             Debug.DrawRay(rayOrigin, rayDirection * rangerViewRadius, Color.red);
             if (hit.collider != null && hit.collider.gameObject == target)
