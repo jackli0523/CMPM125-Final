@@ -11,6 +11,10 @@ public class SoldierChaseState : BaseState
 
     public override void LogicUpdate()
     {
+        if (Vector3.Distance(currentEnemy.transform.position, currentEnemy.target.transform.position) >= 4f && currentEnemy.targetAtBack)
+        {
+            currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, currentEnemy.transform.localScale.y, currentEnemy.transform.localScale.z);
+        }
         if (((Soldier)currentEnemy).triggerDodge && ((Soldier)currentEnemy).dodgeTimer == 0)
         {
             currentEnemy.SwitchState(EnemyState.dodge);
