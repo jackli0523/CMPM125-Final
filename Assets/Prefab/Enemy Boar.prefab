@@ -24,7 +24,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &674689929782892088
 Transform:
   m_ObjectHideFlags: 0
@@ -256,6 +256,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78359932ba44aee4794be56c98e8cf70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  targetInSight: 0
+  targetInAttackRange: 0
+  targetChaseable: 0
+  targetAtBack: 0
+  targetAround: 0
+  touchWall: 0
+  faceAgainstWall: 0
+  isHurt: 0
+  isDead: 0
+  enemyState: 0
   rb: {fileID: 0}
   physicsCheck: {fileID: 0}
   animator: {fileID: 0}
@@ -273,19 +284,10 @@ MonoBehaviour:
   checkBoxDistance: 3
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
-  targetInSight: 0
-  targetInAttackRange: 0
-  targetChaseable: 0
-  targetAtBack: 0
+    m_Bits: 128
   targetAroundDistance: 4
-  targetAround: 0
-  target: {fileID: 0}
   lostTargetTime: 3
   lostTargetTimeCounter: 3
-  isHurt: 0
-  isDead: 0
-  enemyState: 0
   waitTime: 2
   waitTimeCounter: 2
   wait: 0

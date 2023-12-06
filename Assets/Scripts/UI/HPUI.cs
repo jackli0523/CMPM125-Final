@@ -13,13 +13,13 @@ public class HPUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        HPSlider.maxValue = Character.maxHealth;
+        HPSlider.maxValue = TransformManager.Instance.maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        HPSlider.value = Character.currentHealth;
-        text.text = $"{Character.currentHealth} / {Character.maxHealth}";
+        HPSlider.value = TransformManager.Instance.currentHealth;
+        text.text = $"{HPSlider.value} / {HPSlider.maxValue}";
     }
 }

@@ -332,7 +332,7 @@ MonoBehaviour:
   isHurt: 0
   isDead: 0
   isAttack: 0
-  runSpeed: 300
+  runSpeed: 450
 --- !u!114 &946182246422423781
 MonoBehaviour:
   m_ObjectHideFlags: 0

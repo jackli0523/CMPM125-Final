@@ -18,16 +18,17 @@ public class CharacterSelectionUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!TrasformUIPanel.isTab) return;
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            currentSelected = 0;    
+            currentSelected = 0;
             pressed = true;
 
             TransformManager.Instance.transformer(0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if(!TransformManager.Instance.isLookingSoldier) return;
+            if (!TransformManager.Instance.isLookingSoldier) return;
             currentSelected = 1;
             pressed = true;
 
@@ -35,7 +36,7 @@ public class CharacterSelectionUI : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if(!TransformManager.Instance.isLookingRanger) return;
+            if (!TransformManager.Instance.isLookingBoar) return;
             currentSelected = 2;
             pressed = true;
 
@@ -43,20 +44,21 @@ public class CharacterSelectionUI : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            if(!TransformManager.Instance.isLookingBoar) return;
+            if (!TransformManager.Instance.isLookingRanger) return;
             currentSelected = 3;
             pressed = true;
 
             TransformManager.Instance.transformer(3);
         }
-        
+
         if (pressed)
         {
             pressed = false;
             HideAll();
             CharcterImages[currentSelected].SetActive(true);
         }
-        
+
+
     }
 
     void HideAll()

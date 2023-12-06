@@ -127,7 +127,6 @@ public class TransformManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Slime");
                 Destroy(currentPlayer);
                 currentPlayer = Instantiate(slimePrefab, currentPlayer.transform.position, currentPlayer.transform.rotation);
 
@@ -143,7 +142,7 @@ public class TransformManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Soldier");
+                
                 currentPlayer.SetActive(false);
                 currentPlayer = Instantiate(soldierPrefab, currentTransform.position, currentTransform.rotation);
 
@@ -154,11 +153,12 @@ public class TransformManager : MonoBehaviour
         {
             if (currentPlayerIndex == 2)
             {
+                
                 return;
             }
             else
             {
-                Debug.Log("Boar");
+        
                 Destroy(currentPlayer);
                 currentPlayer = Instantiate(BoarPrefab, currentPlayer.transform.position, currentPlayer.transform.rotation);
 
@@ -174,7 +174,6 @@ public class TransformManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Ranger");
                 Destroy(currentPlayer);
                 currentPlayer = Instantiate(RangerPrefab, currentPlayer.transform.position, currentPlayer.transform.rotation);
             

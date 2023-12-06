@@ -14,7 +14,9 @@ public class Enemy : MonoBehaviour
     public bool targetChaseable = false;
     public bool targetAtBack = false;
     public bool targetAround = false;
-    private bool lostTarget = false;
+    protected bool lostTarget = false;
+    public bool touchWall = false;
+    public bool faceAgainstWall = false;
     [Header("Current State For Debug")]
     public bool isHurt;
     public bool isDead;
@@ -167,9 +169,17 @@ public class Enemy : MonoBehaviour
     {
         return targetInSight = false;
     }
+    public virtual bool IsTouchWall()
+    {
+        return touchWall = physicsCheck.touchLeftWall || physicsCheck.touchRightWall;
+    }
+    public virtual bool IsFaceAgainstWall()
+    {
+        return faceAgainstWall = (physicsCheck.touchLeftWall && currentFaceDirection == FaceDirection.left) || (physicsCheck.touchRightWall && currentFaceDirection == FaceDirection.right);
+    }
     public virtual bool IsTargetChaseable()
     {
-        return targetChaseable = targetInSight && Mathf.Abs(transform.position.y - target.transform.position.y) <= 0.2f;
+        return targetChaseable = !IsFaceAgainstWall() && physicsCheck.isGrounded && targetInSight && Mathf.Abs(transform.position.y - target.transform.position.y) <= 0.2f;
     }
     public virtual bool IsTargetAround()
     {

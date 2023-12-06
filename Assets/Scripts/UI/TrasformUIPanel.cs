@@ -5,6 +5,7 @@ using UnityEngine;
 public class TrasformUIPanel : MonoBehaviour
 {
     public GameObject Panel;
+    public static bool isTab = false;
 
     private void Start()
     {
@@ -18,11 +19,13 @@ public class TrasformUIPanel : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             Panel.SetActive(true);
+            isTab = true;
         }
 
         if (Input.GetKeyUp(KeyCode.Tab))
         {
             Panel.SetActive(false);
+            isTab = false;
         }
     }
 }
