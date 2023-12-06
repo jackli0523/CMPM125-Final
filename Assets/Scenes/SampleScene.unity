@@ -1330,6 +1330,8 @@ MonoBehaviour:
   targetChaseable: 0
   targetAtBack: 0
   targetAround: 0
+  touchWall: 0
+  faceAgainstWall: 0
   isHurt: 0
   isDead: 0
   enemyState: 0
@@ -27746,6 +27748,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 47596238147512821, guid: aaf9a0802fb87aa499f94541620683df, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1339654109351843108, guid: aaf9a0802fb87aa499f94541620683df, type: 3}
       propertyPath: m_Name
       value: Enemy Soldier

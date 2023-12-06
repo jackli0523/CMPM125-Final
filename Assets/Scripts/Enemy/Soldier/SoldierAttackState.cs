@@ -29,23 +29,17 @@ public class SoldierAttackState : BaseState
         }
         else
         {
-            if (currentEnemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > .8f)
+            if (currentEnemy.targetInAttackRange && currentEnemy.targetChaseable)
             {
-                if (currentEnemy.targetInAttackRange && currentEnemy.targetChaseable)
+                currentEnemy.animator.SetTrigger("attack");
+                if (currentEnemy.animator.GetCurrentAnimatorStateInfo(0).IsName("Enemy Soldier Attack2"))
                 {
-                    currentEnemy.animator.SetTrigger("attack");
-                    if (currentEnemy.animator.GetCurrentAnimatorStateInfo(0).IsName("Enemy Soldier Attack2"))
-                    {
-                        ((Soldier)currentEnemy).attackTimer = ((Soldier)currentEnemy).attackCooldown;
-                    }
-                    return;
+                    ((Soldier)currentEnemy).attackTimer = ((Soldier)currentEnemy).attackCooldown;
                 }
-            }
-            else if (currentEnemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
-            {
-                currentEnemy.SwitchState(EnemyState.chase);
+                return;
             }
         }
+        currentEnemy.SwitchState(EnemyState.chase);
     }
     public override void PhysicsUpdate() { }
     public override void OnExit()

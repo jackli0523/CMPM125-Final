@@ -464,9 +464,9 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0}
   attacker: {fileID: 0}
   hurtForce: 5
-  centerOffset: {x: 0, y: 1.5}
-  checkBoxSize: {x: 8, y: 1}
-  checkBoxDistance: 5
+  centerOffset: {x: 0, y: 1}
+  checkBoxSize: {x: 8, y: 2}
+  checkBoxDistance: 4
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
