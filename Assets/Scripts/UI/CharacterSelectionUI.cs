@@ -20,23 +20,34 @@ public class CharacterSelectionUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            currentSelected = 0;
+            currentSelected = 0;    
             pressed = true;
+
+            TransformManager.Instance.transformer(0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            if(!TransformManager.Instance.isLookingSoldier) return;
             currentSelected = 1;
             pressed = true;
+
+            TransformManager.Instance.transformer(1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            if(!TransformManager.Instance.isLookingRanger) return;
             currentSelected = 2;
             pressed = true;
+
+            TransformManager.Instance.transformer(2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
+            if(!TransformManager.Instance.isLookingBoar) return;
             currentSelected = 3;
             pressed = true;
+
+            TransformManager.Instance.transformer(3);
         }
         
         if (pressed)

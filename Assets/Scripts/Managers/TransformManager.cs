@@ -15,6 +15,8 @@ public class TransformManager : MonoBehaviour
     public GameObject BoarPrefab;
     public GameObject soldierPrefab;
     public GameObject RangerPrefab;
+    public float currentPlayerIndex = 0;
+    private Transform currentTransform;
 
     public bool isLookingBoar;
     public bool isLookingSoldier;
@@ -41,7 +43,6 @@ public class TransformManager : MonoBehaviour
         }
         inputControl = new PlayerInputControl();
         currentPlayer = FindObjectOfType<PlayerController>().gameObject;
-        inputControl.Gameplay.Transform.started += TransformInput;
         currentHealth = maxHealth;
     }
 
@@ -61,53 +62,130 @@ public class TransformManager : MonoBehaviour
         {
             cinemachineCamera.Follow = currentPlayer.transform;
         }
+        currentPlayer = FindObjectOfType<PlayerController>().gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentPlayer = FindObjectOfType<PlayerController>().gameObject;
+
     }
 
-    public void SetHitTag(string hitTag)
-    {
-        this.hitTag = hitTag;
-    }
+    //     public void transformer(float order)
+    // {
+    //     currentTransform = currentPlayer.transform;
+    //     GameObject oldPlayer = currentPlayer;
 
-    public void SetHitTag()
-    {
-        this.hitTag = null;
-    }
+    //     if(order == currentPlayerIndex)
+    //     {
+    //         return;
+    //     }
+    //     oldPlayer.SetActive(false);
+    //     Vector3 position = currentTransform.position;
+    //     Quaternion rotation = currentTransform.rotation;
 
-    public void TransformCharacter(GameObject transformPrefab, Vector3 position)
-    {
 
-        if (currentPlayer != null)
+    //     if(order == 0)
+    //     {
+    //         Debug.Log("Slime");
+    //         currentPlayer = Instantiate(slimePrefab, position, rotation);
+
+    //     }
+    //     else if(order == 1 && isLookingSoldier)
+    //     {
+    //         Debug.Log("Soldier");
+    //         currentPlayer = Instantiate(soldierPrefab, position, rotation);
+    //     }
+    //     else if(order == 2 && isLookingBoar)
+    //     {
+    //         Debug.Log("Boar");
+    //         currentPlayer = Instantiate(BoarPrefab, position, rotation);
+    //     }
+    //     else if(order == 3 && isLookingRanger)
+    //     {
+    //         Debug.Log("Ranger");
+    //         currentPlayer = Instantiate(RangerPrefab, position, rotation);
+    //     }
+
+    //     Destroy(oldPlayer);
+
+    //     currentPlayerIndex = order;
+    //     if (cinemachineCamera != null)
+    //     {
+    //         cinemachineCamera.Follow = currentPlayer.transform;
+    //     }
+    // }
+
+    public void transformer(float order)
+    {
+        currentTransform = currentPlayer.transform;
+        if (order == 0)
         {
-            Destroy(currentPlayer);
+            if (currentPlayerIndex == 0)
+            {
+                return;
+            }
+            else
+            {
+                Debug.Log("Slime");
+                Destroy(currentPlayer);
+                currentPlayer = Instantiate(slimePrefab, currentPlayer.transform.position, currentPlayer.transform.rotation);
+
+                currentPlayerIndex = order;
+            }
+        }
+        else if (order == 1 && isLookingSoldier)
+        {
+
+            if (currentPlayerIndex == 1)
+            {
+                return;
+            }
+            else
+            {
+                Debug.Log("Soldier");
+                currentPlayer.SetActive(false);
+                currentPlayer = Instantiate(soldierPrefab, currentTransform.position, currentTransform.rotation);
+
+                currentPlayerIndex = order;
+            }
+        }
+        else if (order == 2 && isLookingBoar)
+        {
+            if (currentPlayerIndex == 2)
+            {
+                return;
+            }
+            else
+            {
+                Debug.Log("Boar");
+                Destroy(currentPlayer);
+                currentPlayer = Instantiate(BoarPrefab, currentPlayer.transform.position, currentPlayer.transform.rotation);
+
+                currentPlayerIndex = order;
+            }
+        }
+        else if (order == 3 && isLookingRanger)
+        {
+
+            if (currentPlayerIndex == 3)
+            {
+                return;
+            }
+            else
+            {
+                Debug.Log("Ranger");
+                Destroy(currentPlayer);
+                currentPlayer = Instantiate(RangerPrefab, currentPlayer.transform.position, currentPlayer.transform.rotation);
+            
+                currentPlayerIndex = order;
+            }
         }
 
-
-        currentPlayer = Instantiate(soldierPrefab, position, Quaternion.identity);
-        cinemachineCamera.Follow = currentPlayer.transform;
-
-    }
-
-    public void TransformInput(InputAction.CallbackContext obj)
-    {
-        if (hitTag != null)
+        if (cinemachineCamera != null)
         {
-            if (hitTag == "Soldier")
-            {
-                TransformCharacter(soldierPrefab, currentPlayer.transform.position);
-
-            }
-
-            if (hitTag == "Boar")
-            {
-                TransformCharacter(soldierPrefab, currentPlayer.transform.position);
-            }
+            cinemachineCamera.Follow = currentPlayer.transform;
         }
-
     }
+
 }
